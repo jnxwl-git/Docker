@@ -43,7 +43,9 @@ docker tag denis_ubuntu denis_ubuntu-PROD:v2
 docker rm   # delete container
 docker rmi  # delete image
 
+docker run --name test -d -p  1234:80  apache:latest
 
+docker exec -it test
 ------------
 UPDATE IMAGE
 ------------
@@ -52,6 +54,7 @@ docker exec -it 5267e21d140 /bin/bash
 echo "V2" >> /var/www/html/index.html
 exit
 docker commit 5267e21d140 denis_v2:latest
+docker cp a.py ubu_container:/home/dir1
 
 
 ----------------------------------
@@ -77,3 +80,5 @@ Kill and Delete Containers and Images
 -------------------------------------
 docker rm -f $(docker ps -aq)        # Delete all Containers
 docker rmi -f $(docker images -q)    # Delete all Images
+
+docker rmi -f $(docker images -q) && docker rm -f $(docker ps -aq)
